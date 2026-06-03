@@ -7,11 +7,11 @@ API Express — repo [mmfweb/backend](https://github.com/mmfweb/backend).
 | Parte | Plataforma |
 |-------|------------|
 | **Web** | Vercel → [mmfweb/front](https://github.com/mmfweb/front) |
-| **API** | **Northflank** → `api.marianamarinflor.com` |
+| **API** | **Koyeb Free** (0 €) → `api.marianamarinflor.com` |
 
-Guía API: **[DEPLOY-NORTHFLANK.md](./DEPLOY-NORTHFLANK.md)** (incluye `Dockerfile`)
+Guía API: **[DEPLOY-KOYEB.md](./DEPLOY-KOYEB.md)**
 
-Alternativa: [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md) (horario punta en plan Free EU)
+Otras: [DEPLOY-NORTHFLANK.md](./DEPLOY-NORTHFLANK.md) · [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md)
 
 ## Desarrollo local
 

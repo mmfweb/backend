@@ -1,4 +1,12 @@
+# API en Northflank (alternativa)
+
+**Recomendado si no quieres pagar:** [DEPLOY-KOYEB.md](./DEPLOY-KOYEB.md) (Free, sin tarjeta).
+
+---
+
 # API en Northflank (para Vercel front)
+
+Usa solo plan **Developer Sandbox** e instancia **gratis** (no `nf-compute-400` ni planes de pago).
 
 ## Crear servicio (5 min)
 
