@@ -14,7 +14,9 @@
     "test:email": "tsx scripts/test-contact-email.ts",
     "deploy:railway": "bash scripts/deploy-railway.sh",
     "setup:domain": "bash scripts/setup-domain.sh",
-    "deploy:render": "bash scripts/render-sync-and-deploy.sh"
+    "deploy:render": "bash scripts/render-sync-and-deploy.sh",
+    "render:create": "bash scripts/render-create-and-deploy.sh",
+    "render:env-file": "bash scripts/generate-render-env-upload.sh"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

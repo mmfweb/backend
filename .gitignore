@@ -4,5 +4,6 @@ dist/
 *.log
 .env
 .env.local
+render.env.upload
 github_projects_cache.json
 db_store.json

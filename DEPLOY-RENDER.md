@@ -1,81 +1,49 @@
 # API en Render (gratis) + Vercel (front)
 
-## 1. Crear el servicio (Blueprint)
+## Si borraste el proyecto en Render
 
-1. https://dashboard.render.com → login con **GitHub**
-2. **New +** → **Blueprint**
-3. Conecta repo **mmfweb/backend** (rama `main`)
-4. Render lee `render.yaml` y crea **portfolio-api** (plan **Free**, región **Frankfurt**)
-5. En **Environment**, comprueba que existan **todas** estas (si falta alguna, el servicio no arranca):
+### Opción A — Rápida (recomendada, sin API key)
 
-| Variable | Valor |
-|----------|--------|
-| **FRONTEND_ORIGIN** | `https://www.marianamarinflor.com,https://marianamarinflor.com,https://frontend-five-topaz-53.vercel.app` |
-| NODE_ENV | `production` |
-| CONTACT_PERSIST_MESSAGES | `false` |
-| GITHUB_REPO_LIMIT | `12` |
-| GITHUB_PUBLIC_REPO_COUNT | `32` |
-| GITHUB_REPO_EXCLUDE | `vibe-tracking` |
-| SMTP_HOST | `smtp.gmail.com` |
-| SMTP_PORT | `587` |
+1. Genera el archivo de variables:
+   ```bash
+   cd backend
+   npm run render:env-file
+   ```
+2. https://dashboard.render.com → **New +** → **Blueprint** → repo **mmfweb/backend**
+3. Plan **Free** · región **Frankfurt**
+4. Rellena las variables secretas que pida el Blueprint (desde tu `.env`)
+5. **Environment** → **Add from .env** → abre `render.env.upload` y **pega todo**
+6. **Save, rebuild, and deploy**
 
-6. Te pedirá rellenar variables **sync: false** — copia desde tu `backend/.env`:
-   - `GITHUB_USERNAME`
-   - `GITHUB_TOKEN`
-   - `CONTACT_TO`
-   - `SMTP_USER`
-   - `SMTP_PASS`
-7. **Apply** → espera estado **Live**
+### Opción B — Todo desde terminal (con API key)
 
-**Deploy Failed:** abre **Logs** del deploy. Si dice `Faltan variables...`, en **Environment** añade todas las de `render.env.example` (valores secretos desde tu `.env`) → **Save** → **Manual Deploy**.
-
-El aviso *"spin down with inactivity"* es normal en plan **Free** (no es el fallo).
-
-Prueba la URL de Render: `https://portfolio-api-xxxx.onrender.com/api/health`
+1. https://dashboard.render.com/u/settings#api-keys → **Create API Key**
+2. En `backend/.env`: `RENDER_API_KEY=rnd_...`
+3. ```bash
+   cd backend
+   npm run render:create
+   ```
+   Crea el servicio, sube variables y despliega.
 
 ---
 
-## 2. Dominio `api.marianamarinflor.com`
+## Variables obligatorias
 
-1. Render → servicio **portfolio-api** → **Settings** → **Custom Domains**
-2. Añade `api.marianamarinflor.com`
-3. **Porkbun** → quita **URL Forwarding** → CNAME:
+Ver `render.env.example` o el archivo generado `render.env.upload`.
 
-| Tipo | Host | Valor |
-|------|------|--------|
-| CNAME | `api` | `portfolio-api-xxxx.onrender.com` (el que indique Render) |
-
-4. Web (Vercel): A `www` y `@` → `76.76.21.21`
+La más olvidada: **FRONTEND_ORIGIN** (sin ella el deploy falla con status 1).
 
 ---
 
-## 3. Vercel (frontend)
+## Dominio `api.marianamarinflor.com`
 
-Variable en producción:
-
-`VITE_API_URL=https://api.marianamarinflor.com`
-
-Redeploy si cambias la URL.
+1. Render → **portfolio-api** → **Settings** → **Custom Domains**
+2. Porkbun: quitar **URL Forwarding** · CNAME `api` → host de Render
+3. Vercel: `VITE_API_URL=https://api.marianamarinflor.com`
 
 ---
 
-## 4. Comprobar
+## Plan Free
 
-- [ ] https://api.marianamarinflor.com/api/health → `{"ok":true,...}`
-- [ ] https://api.marianamarinflor.com/api/projects → lista JSON
-- [ ] https://www.marianamarinflor.com → proyectos visibles
-
----
-
-## Notas plan Free
-
-- El servicio **se duerme** tras ~15 min sin tráfico; la 1ª petición puede tardar **30–50 s**.
-- Es normal en Render Free; no es un error de tu código.
-
----
-
-## Enlace directo Blueprint
-
-https://dashboard.render.com/select-repo?type=blueprint
-
-(elige **mmfweb/backend**)
+- Se duerme tras ~15 min sin tráfico (1ª petición lenta). Normal.
+- No elijas **Starter ($7)**.
