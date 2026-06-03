@@ -27,7 +27,9 @@
    - `SMTP_PASS`
 7. **Apply** → espera estado **Live**
 
-**Error `FRONTEND_ORIGIN es obligatorio`:** Render → **portfolio-api** → **Environment** → añade `FRONTEND_ORIGIN` (tabla arriba) → **Save** → **Manual Deploy**.
+**Deploy Failed:** abre **Logs** del deploy. Si dice `Faltan variables...`, en **Environment** añade todas las de `render.env.example` (valores secretos desde tu `.env`) → **Save** → **Manual Deploy**.
+
+El aviso *"spin down with inactivity"* es normal en plan **Free** (no es el fallo).
 
 Prueba la URL de Render: `https://portfolio-api-xxxx.onrender.com/api/health`
 

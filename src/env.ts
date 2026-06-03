@@ -16,33 +16,31 @@ export function getFrontendOrigins(): string[] {
 export function validateProductionEnv(): void {
   if (!isProduction) return;
 
+  const missing: string[] = [];
+
   const origins = getFrontendOrigins();
   if (origins.length === 0) {
-    throw new Error(
-      "FRONTEND_ORIGIN es obligatorio en producción (URL pública del portfolio, sin barra final)."
-    );
-  }
-
-  for (const origin of origins) {
-    if (!/^https:\/\//.test(origin)) {
-      throw new Error(
-        `FRONTEND_ORIGIN debe usar HTTPS en producción: "${origin}"`
-      );
+    missing.push("FRONTEND_ORIGIN");
+  } else {
+    for (const origin of origins) {
+      if (!/^https:\/\//.test(origin)) {
+        throw new Error(
+          `FRONTEND_ORIGIN debe usar HTTPS en producción: "${origin}"`
+        );
+      }
     }
   }
 
-  const smtpOk =
-    process.env.SMTP_USER?.trim() &&
-    process.env.SMTP_PASS?.trim() &&
-    process.env.CONTACT_TO?.trim();
-  if (!smtpOk) {
-    throw new Error(
-      "SMTP_USER, SMTP_PASS y CONTACT_TO son obligatorios en producción."
-    );
-  }
+  if (!process.env.GITHUB_TOKEN?.trim()) missing.push("GITHUB_TOKEN");
+  if (!process.env.SMTP_USER?.trim()) missing.push("SMTP_USER");
+  if (!process.env.SMTP_PASS?.trim()) missing.push("SMTP_PASS");
+  if (!process.env.CONTACT_TO?.trim()) missing.push("CONTACT_TO");
 
-  if (!process.env.GITHUB_TOKEN?.trim()) {
-    throw new Error("GITHUB_TOKEN es obligatorio en producción.");
+  if (missing.length > 0) {
+    throw new Error(
+      `Faltan variables en Render → Environment: ${missing.join(", ")}. ` +
+        "Ver backend/DEPLOY-RENDER.md y backend/render.env.example"
+    );
   }
 }
 
