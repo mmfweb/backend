@@ -83,7 +83,7 @@ print(json.dumps({
     "plan": "free",
     "region": "frankfurt",
     "envSpecificDetails": {
-      "buildCommand": "npm install && npm run build",
+      "buildCommand": "npm install --include=dev && npm run build",
       "startCommand": "npm start",
       "healthCheckPath": "/api/health"
     }
