@@ -13,7 +13,8 @@
     "lint": "tsc --noEmit",
     "test:email": "tsx scripts/test-contact-email.ts",
     "deploy:railway": "bash scripts/deploy-railway.sh",
-    "setup:domain": "bash scripts/setup-domain.sh"
+    "setup:domain": "bash scripts/setup-domain.sh",
+    "deploy:render": "bash scripts/render-sync-and-deploy.sh"
   },
   "dependencies": {
     "dotenv": "^17.2.3",
