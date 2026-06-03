@@ -14,12 +14,13 @@
 
 # 1. Railway (backend) — 15 min
 
-## Opción A — Panel (más fácil)
+## Opción A — GitHub + dominio (recomendada)
 
 1. https://railway.com → Login con GitHub  
 2. **New Project** → **Deploy from GitHub repo** → **mmfweb/backend**  
 3. Railway detecta `railway.toml` (build + start + health).  
-4. Abre el servicio → **Variables** → pega desde tu `.env` local:
+4. **Deploy** fuera de horario punta (plan Free, EU: antes de 08:00 o después de 20:00, hora España).  
+5. Abre el servicio → **Variables** → pega desde tu `.env` local:
 
 ```
 NODE_ENV=production
@@ -37,10 +38,12 @@ SMTP_PASS=...
 CONTACT_PERSIST_MESSAGES=false
 ```
 
-5. **Settings → Networking → Public Networking** → ON  
-6. **Custom Domain** → `api.marianamarinflor.com`  
-7. Copia el CNAME (ej. `xxxx.up.railway.app`) → Porkbun (paso 3)  
-8. Prueba: https://api.marianamarinflor.com/api/health  
+6. **Settings → Networking → Public Networking** → ON  
+7. **Custom Domain** → `api.marianamarinflor.com` (o en terminal, tras `railway login`: `npm run setup:domain`)  
+8. Copia el CNAME (ej. `xxxx.up.railway.app`) → Porkbun (paso 3)  
+9. Prueba: https://api.marianamarinflor.com/api/health  
+
+**Sí:** con deploy por GitHub puedes usar tu dominio; el código se actualiza con cada `git push` a `main`.
 
 ## Opción B — Terminal (para que el agente despliegue)
 
@@ -52,13 +55,17 @@ railway login
 
 Luego dime **"ya estoy logueada en railway"** y puedo ejecutar el deploy desde aquí.
 
-O con token (crear en https://railway.com/account/tokens):
+O con **token de cuenta** en `backend/.env` (no lo subas a Git):
+
+```env
+RAILWAY_API_TOKEN=tu_token_de_cuenta
+```
+
+Crear en https://railway.com/account/tokens (no confundir con el token del **proyecto**, que solo sirve para `railway up` en CI).
 
 ```bash
-export RAILWAY_TOKEN="tu_token_solo_en_terminal"
 cd backend
-railway init
-railway up
+npm run deploy:railway
 ```
 
 ---
@@ -119,6 +126,7 @@ Espera 5–30 min de propagación.
 
 | Problema | Solución |
 |----------|----------|
+| **Peak hours** (`europe-west4-drams3a` … not available 8 AM – 8 PM Europe/Amsterdam) | Plan **Free**: en región **EU West** no se puede desplegar de **08:00 a 20:00** (hora de Ámsterdam/Madrid). Los cambios del panel (**Apply 3 changes** / Deploy) quedan guardados: vuelve a pulsar **Deploy** **después de las 20:00** o **antes de las 08:00**, o cambia región del servicio a **US West** / **US East** (Settings del servicio) y despliega en la franja no punta de esa zona. **Hobby** (~5 €/mes) quita el límite. |
 | CORS | `FRONTEND_ORIGIN` = URLs exactas de Vercel (https, con/sin www) |
 | 503 formulario | SMTP en Railway |
 | Proyectos vacíos | `GITHUB_TOKEN` en Railway |
