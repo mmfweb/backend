@@ -5,8 +5,9 @@ API Express para el portfolio de **Mariana Marin**: proyectos desde GitHub, tray
 ## Stack
 
 - Node.js 20+, Express, TypeScript
-- Despliegue recomendado: **Railway** (`railway.toml` incluido)
-- Frontend asociado: **Vercel** (repo separado)
+- Despliegue recomendado: **Render** (`render.yaml` incluido)
+- Alternativas: Fly.io, Koyeb, VPS con Node
+- Frontend: **Vercel** — repo [mmfweb/front](https://github.com/mmfweb/front)
 
 ## Desarrollo local
 
@@ -30,45 +31,58 @@ npm run dev
 
 Arranca el frontend por separado (`npm run dev` en su carpeta, puerto 5173).
 
-## Producción (Railway)
+## Producción (Render) — recomendado
 
 | Paso | Acción |
 |------|--------|
-| 1 | Repo GitHub solo con esta carpeta `backend/` |
-| 2 | [Railway](https://railway.app) → New Project → Deploy from GitHub |
-| 3 | Variables en **Variables** (ver tabla abajo) |
-| 4 | Settings → Networking → **Generate domain** o dominio custom `api.tudominio.com` |
-| 5 | Comprueba `https://tu-api.up.railway.app/api/health` |
+| 1 | [render.com](https://render.com) → cuenta gratis → **New +** → **Web Service** |
+| 2 | Conectar GitHub → repo **mmfweb/backend** |
+| 3 | Runtime: **Node** · Branch: `main` |
+| 4 | Build: `npm install && npm run build` · Start: `npm start` |
+| 5 | Health check path: `/api/health` |
+| 6 | Variables de entorno (tabla abajo) |
+| 7 | **Settings → Custom Domains** → `api.marianamarinflor.com` |
+| 8 | En Porkbun: CNAME `api` → el host que indique Render |
 
-Railway usa `railway.toml`: build `npm run build`, start `npm start`, health `/api/health`.
+O importar blueprint: **New +** → **Blueprint** → repo `mmfweb/backend` (usa `render.yaml`).
 
-El puerto lo inyecta Railway en `PORT` (no hace falta fijarlo a mano).
+Render inyecta `PORT` automáticamente. El plan free puede “dormir” el servicio tras inactividad (arranque ~30 s).
 
-### Variables obligatorias
+### Variables obligatorias en Render
 
-| Variable | Ejemplo |
-|----------|---------|
-| `NODE_ENV` | `production` (o deja que `npm start` lo aplique) |
-| `FRONTEND_ORIGIN` | `https://www.tudominio.com` |
-| `GITHUB_TOKEN` | Token personal GitHub (sin scopes extra) |
+| Variable | Ejemplo (`marianamarinflor.com`) |
+|----------|----------------------------------|
+| `NODE_ENV` | `production` |
+| `FRONTEND_ORIGIN` | `https://www.marianamarinflor.com,https://marianamarinflor.com` |
+| `GITHUB_TOKEN` | Token personal GitHub |
 | `SMTP_USER`, `SMTP_PASS`, `CONTACT_TO` | Gmail + contraseña de aplicación |
 
-Opcionales recomendadas:
+Recomendadas:
 
-| Variable | Uso |
-|----------|-----|
-| `CONTACT_PERSIST_MESSAGES=false` | No guardar mensajes en `db_store.json` (solo email) |
-| `ADMIN_REFRESH_SECRET` | Proteger `?refresh=1` en sincronización GitHub |
-| `GITHUB_REPO_LIMIT`, `GITHUB_REPO_EXCLUDE`, etc. | Ver `.env.example` |
+| Variable | Valor |
+|----------|--------|
+| `CONTACT_PERSIST_MESSAGES` | `false` |
+| `ADMIN_REFRESH_SECRET` | (opcional, para `?refresh=1`) |
 
-`FRONTEND_ORIGIN`: HTTPS, sin barra final. Varias URLs separadas por coma.
+### Dominio en Porkbun
 
-### Dominio custom en Railway
+| Tipo | Host | Valor |
+|------|------|--------|
+| CNAME | `api` | `portfolio-api-xxxx.onrender.com` (el que te dé Render) |
 
-1. Settings → Networking → Custom Domain → `api.tudominio.com`  
-2. En tu DNS: CNAME `api` → el host que indique Railway  
-3. Espera SSL activo  
-4. Usa esa URL en Vercel como `VITE_API_URL`
+Prueba: `https://api.marianamarinflor.com/api/health`
+
+En **Vercel** (frontend): `VITE_API_URL=https://api.marianamarinflor.com`
+
+## Otras plataformas (sin Railway)
+
+| Plataforma | Notas |
+|------------|--------|
+| **Fly.io** | `fly launch` + `fly deploy`, buen uptime |
+| **Koyeb** | Similar a Render, GitHub + Node |
+| **VPS** (Hetzner, etc.) | `npm run build && npm start` detrás de nginx |
+
+No uses Vercel para este backend: es Express persistente, no serverless.
 
 ## Scripts
 

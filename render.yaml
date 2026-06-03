@@ -1,0 +1,26 @@
+# Blueprint Render — https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: portfolio-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: GITHUB_USERNAME
+        value: marianamarinflor622
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: CONTACT_TO
+        sync: false
+      - key: CONTACT_PERSIST_MESSAGES
+        value: "false"
