@@ -18,7 +18,7 @@ Nunca commitear `.env`. Rotar `GITHUB_TOKEN` y `SMTP_PASS` si se filtraron.
 
 ## Recomendaciones operativas
 
-1. `CONTACT_PERSIST_MESSAGES=false` en Render (solo correo, sin PII en disco).
+1. `CONTACT_PERSIST_MESSAGES=false` en Railway (solo correo, sin PII en disco).
 2. `ADMIN_REFRESH_SECRET` si usas sincronización forzada de GitHub.
 3. Token GitHub: solo permiso público, sin scopes innecesarios.
 4. Revisar dependencias: `npm audit` periódicamente.
