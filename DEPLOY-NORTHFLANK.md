@@ -13,7 +13,7 @@
 
 ```
 NODE_ENV=production
-FRONTEND_ORIGIN=https://www.marianamarinflor.com,https://marianamarinflor.com
+FRONTEND_ORIGIN=https://www.marianamarinflor.com,https://marianamarinflor.com,https://frontend-five-topaz-53.vercel.app
 CONTACT_PERSIST_MESSAGES=false
 GITHUB_USERNAME=...
 GITHUB_TOKEN=...
@@ -39,4 +39,12 @@ Prueba: https://api.marianamarinflor.com/api/health
 
 En Vercel (`mmfweb/front`): `VITE_API_URL=https://api.marianamarinflor.com`
 
-`FRONTEND_ORIGIN` en Northflank debe incluir exactamente las URLs HTTPS del front en Vercel.
+`FRONTEND_ORIGIN` debe incluir **todas** las URLs HTTPS desde las que abres el portfolio (Vercel + dominio propio).
+
+## Porkbun (junto con Vercel)
+
+1. **URL Forwarding** → desactivar (si no, el dominio va a l.ink).
+2. Web: A `www` y `@` → `76.76.21.21` (Vercel).
+3. API: CNAME `api` → host que te dé Northflank.
+
+Guía web: `frontend/DEPLOY-PORKBUN-DNS.md`

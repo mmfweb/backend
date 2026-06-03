@@ -11,7 +11,7 @@ API Express — repo [mmfweb/backend](https://github.com/mmfweb/backend).
 
 Guía API: **[DEPLOY-NORTHFLANK.md](./DEPLOY-NORTHFLANK.md)** (incluye `Dockerfile`)
 
-Alternativas: [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md) · `render.yaml`
+Alternativa: [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md) (horario punta en plan Free EU)
 
 ## Desarrollo local
 
