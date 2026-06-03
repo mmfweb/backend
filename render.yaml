@@ -12,7 +12,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: FRONTEND_ORIGIN
-        value: https://www.marianamarinflor.com,https://marianamarinflor.com
+        value: https://www.marianamarinflor.com,https://marianamarinflor.com,https://frontend-five-topaz-53.vercel.app
       - key: CONTACT_PERSIST_MESSAGES
         value: "false"
       - key: GITHUB_USERNAME
