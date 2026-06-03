@@ -6,13 +6,28 @@
 2. **New +** → **Blueprint**
 3. Conecta repo **mmfweb/backend** (rama `main`)
 4. Render lee `render.yaml` y crea **portfolio-api** (plan **Free**, región **Frankfurt**)
-5. Te pedirá rellenar variables **sync: false** — copia desde tu `backend/.env`:
+5. En **Environment**, comprueba que existan **todas** estas (si falta alguna, el servicio no arranca):
+
+| Variable | Valor |
+|----------|--------|
+| **FRONTEND_ORIGIN** | `https://www.marianamarinflor.com,https://marianamarinflor.com,https://frontend-five-topaz-53.vercel.app` |
+| NODE_ENV | `production` |
+| CONTACT_PERSIST_MESSAGES | `false` |
+| GITHUB_REPO_LIMIT | `12` |
+| GITHUB_PUBLIC_REPO_COUNT | `32` |
+| GITHUB_REPO_EXCLUDE | `vibe-tracking` |
+| SMTP_HOST | `smtp.gmail.com` |
+| SMTP_PORT | `587` |
+
+6. Te pedirá rellenar variables **sync: false** — copia desde tu `backend/.env`:
    - `GITHUB_USERNAME`
    - `GITHUB_TOKEN`
    - `CONTACT_TO`
    - `SMTP_USER`
    - `SMTP_PASS`
-6. **Apply** → espera estado **Live**
+7. **Apply** → espera estado **Live**
+
+**Error `FRONTEND_ORIGIN es obligatorio`:** Render → **portfolio-api** → **Environment** → añade `FRONTEND_ORIGIN` (tabla arriba) → **Save** → **Manual Deploy**.
 
 Prueba la URL de Render: `https://portfolio-api-xxxx.onrender.com/api/health`
 

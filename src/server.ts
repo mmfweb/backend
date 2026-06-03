@@ -28,7 +28,10 @@ import {
 } from "./middleware.ts";
 import { stripControlChars } from "./sanitize.ts";
 
-dotenv.config();
+// En Render/Vercel las vars vienen del panel; .env solo en local
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
 
 async function startServer() {
   validateProductionEnv();
