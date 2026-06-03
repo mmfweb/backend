@@ -2,14 +2,16 @@
 
 API Express — repo [mmfweb/backend](https://github.com/mmfweb/backend).
 
-## Despliegue: Railway + Vercel
+## Despliegue recomendado
 
-Guía completa: [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md)
+| Parte | Plataforma |
+|-------|------------|
+| **Web** | Vercel → [mmfweb/front](https://github.com/mmfweb/front) |
+| **API** | **Northflank** → `api.marianamarinflor.com` |
 
-- **API:** Railway → `api.marianamarinflor.com`
-- **Web:** Vercel → `www.marianamarinflor.com` → `VITE_API_URL=https://api.marianamarinflor.com`
+Guía API: **[DEPLOY-NORTHFLANK.md](./DEPLOY-NORTHFLANK.md)** (incluye `Dockerfile`)
 
-Config: `railway.toml` (build, start, health `/api/health`).
+Alternativas: [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md) · `render.yaml`
 
 ## Desarrollo local
 
@@ -19,9 +21,10 @@ npm install && cp .env.example .env && npm run dev
 
 http://localhost:3000/api/health
 
-## Variables producción (Railway)
+## Variables producción
 
-`FRONTEND_ORIGIN`, `GITHUB_TOKEN`, `SMTP_*`, `CONTACT_TO`, `CONTACT_PERSIST_MESSAGES=false`
+`FRONTEND_ORIGIN=https://www.marianamarinflor.com,https://marianamarinflor.com`  
+`GITHUB_TOKEN`, `SMTP_*`, `CONTACT_TO`, `CONTACT_PERSIST_MESSAGES=false`
 
 Ver `.env.example`.
 

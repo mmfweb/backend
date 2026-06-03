@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+.git
+db_store.json
+github_projects_cache.json
+*.md
