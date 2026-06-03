@@ -7,11 +7,11 @@ API Express — repo [mmfweb/backend](https://github.com/mmfweb/backend).
 | Parte | Plataforma |
 |-------|------------|
 | **Web** | Vercel → [mmfweb/front](https://github.com/mmfweb/front) |
-| **API** | **Koyeb Free** (0 €) → `api.marianamarinflor.com` |
+| **API** | **Render Free** → `api.marianamarinflor.com` |
 
-Guía API: **[DEPLOY-KOYEB.md](./DEPLOY-KOYEB.md)**
+Guía API: **[DEPLOY-RENDER.md](./DEPLOY-RENDER.md)** · Blueprint: `render.yaml`
 
-Otras: [DEPLOY-NORTHFLANK.md](./DEPLOY-NORTHFLANK.md) · [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md)
+Otras: [DEPLOY-KOYEB.md](./DEPLOY-KOYEB.md) · [DEPLOY-RAILWAY.md](./DEPLOY-RAILWAY.md)
 
 ## Desarrollo local
 
@@ -23,8 +23,7 @@ http://localhost:3000/api/health
 
 ## Variables producción
 
-`FRONTEND_ORIGIN=https://www.marianamarinflor.com,https://marianamarinflor.com`  
-`GITHUB_TOKEN`, `SMTP_*`, `CONTACT_TO`, `CONTACT_PERSIST_MESSAGES=false`
+`FRONTEND_ORIGIN`, `GITHUB_TOKEN`, `SMTP_*`, `CONTACT_TO`, `CONTACT_PERSIST_MESSAGES=false`
 
 Ver `.env.example`.
 

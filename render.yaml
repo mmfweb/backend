@@ -1,0 +1,37 @@
+# https://dashboard.render.com → New → Blueprint → mmfweb/backend
+services:
+  - type: web
+    name: portfolio-api
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: FRONTEND_ORIGIN
+        value: https://www.marianamarinflor.com,https://marianamarinflor.com,https://frontend-five-topaz-53.vercel.app
+      - key: CONTACT_PERSIST_MESSAGES
+        value: "false"
+      - key: GITHUB_REPO_LIMIT
+        value: "12"
+      - key: GITHUB_PUBLIC_REPO_COUNT
+        value: "32"
+      - key: GITHUB_REPO_EXCLUDE
+        value: vibe-tracking
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: GITHUB_USERNAME
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: CONTACT_TO
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
